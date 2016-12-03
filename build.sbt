@@ -1,7 +1,7 @@
-organization := "me.lessis"
+resolvers += Resolver.url("typesafe", url("http://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns)
 
-name := "unfiltered-oauth-client.g8"
+scriptedBufferLog := false
 
-version := "0.1.0-SNAPSHOT"
-
-seq(giter8Settings :_*)
+scriptedLaunchOpts ++= sys.process.javaVmArguments.filter(
+  a => Seq("-Xmx", "-Xms", "-XX", "-Dsbt.log.noformat").exists(a.startsWith)
+)
