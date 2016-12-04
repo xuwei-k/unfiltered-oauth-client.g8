@@ -1,6 +1,6 @@
 package com.example
 
-import com.typesafe.scalalogging.StrictLogging
+import org.slf4j.LoggerFactory
 
 import unfiltered.request._
 import unfiltered.response._
@@ -18,8 +18,10 @@ import net.liftweb.json.JsonDSL._
 
 import scala.util.control.NonFatal
 
-class App(consumer: Consumer) extends Templates with unfiltered.filter.Plan with StrictLogging {
+class App(consumer: Consumer) extends Templates with unfiltered.filter.Plan {
   import QParams._
+
+  private[this] val logger = LoggerFactory.getLogger(this.getClass)
 
   private val svc = :/("localhost", 8080)
   private val tmap = scala.collection.mutable.Map.empty[String, ClientToken]

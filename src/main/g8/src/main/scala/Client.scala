@@ -1,9 +1,10 @@
 package com.example
 
-import com.typesafe.scalalogging.StrictLogging
+import org.slf4j.LoggerFactory
 
 /** oauth client */
-object Client extends StrictLogging {
+object Client {
+  private[this] val logger = LoggerFactory.getLogger(this.getClass)
   val port = 8081
   val consumer = dispatch.classic.oauth.Consumer("key", "secret")
   def resources = new java.net.URL(getClass.getResource("/web/robots.txt"), ".")
