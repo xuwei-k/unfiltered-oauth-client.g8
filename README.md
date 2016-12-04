@@ -8,9 +8,14 @@ Example of a VERY SIMPLE client of a VERY SIMPLE unfiltered oauth server.
 
 get and run the client
 
-    g8 softprops/unfiltered-oauth-client
-    cd unfiltered-oauth-client && sbt update run
-    
+```
+g8 unfiltered/unfiltered-oauth-client
+cd unfiltered-oauth-client && sbt update run
+```
+
 get and run the server 
-    g8 softprops/unfiltered-oauth-server
-    cd unfiltered-oauth-server && sbt update run
+
+```
+g8 unfiltered/unfiltered-oauth-server
+cd unfiltered-oauth-server && sbt update run
+```
