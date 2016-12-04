@@ -1,5 +1,7 @@
 # unfiltered oauth client
 
+[![Build Status](https://travis-ci.org/unfiltered/unfiltered-oauth-client.g8.svg)](https://travis-ci.org/unfiltered/unfiltered-oauth-client.g8)
+
 Example of a VERY SIMPLE client of a VERY SIMPLE unfiltered oauth server.
 
 # usage
