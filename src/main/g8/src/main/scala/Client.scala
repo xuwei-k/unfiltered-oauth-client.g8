@@ -1,18 +1,19 @@
 package com.example
 
-import org.clapper.avsl.Logger
+import org.slf4j.LoggerFactory
 
 /** oauth client */
 object Client {
-  val log = Logger(Client.getClass)
+  private[this] val logger = LoggerFactory.getLogger(this.getClass)
   val port = 8081
-  val consumer = dispatch.oauth.Consumer("key", "secret")
+  val consumer = dispatch.classic.oauth.Consumer("key", "secret")
   def resources = new java.net.URL(getClass.getResource("/web/robots.txt"), ".")
 
   def main(args: Array[String]) {
-    log.info("starting unfiltered oauth consumer at localhost on port %s" format port)
-    unfiltered.jetty.Http(port)
+    logger.info("starting unfiltered oauth consumer at localhost on port " + port)
+    val binding = unfiltered.jetty.SocketPortBinding(port, "localhost")
+    unfiltered.jetty.Server.portBinding(binding)
       .resources(Client.resources)
-      .filter(new App(consumer)).run
+      .plan(new App(consumer)).run
   }
 }
