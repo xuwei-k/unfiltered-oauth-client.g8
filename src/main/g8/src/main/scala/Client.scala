@@ -8,7 +8,7 @@ object Client {
 
   def main(args: Array[String]) {
     val binding = unfiltered.jetty.SocketPortBinding(port, "localhost")
-    unfiltered.jetty.Server(binding :: Nil, Nil, None)
+    unfiltered.jetty.Server.portBinding(binding)
       .resources(Client.resources)
       .plan(new App(consumer)).run
   }
