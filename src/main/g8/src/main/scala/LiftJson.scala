@@ -32,8 +32,7 @@ class JsonCallbackVerbs(subject: CallbackVerbs) {
     subject ^-- { s => block(JsonParser.parse(s)) }
 }
 object Js extends TypeMappers with ImplicitJsonVerbs {
-  implicit def jvlistcomb[LT](block: JValue => List[LT]) = new JvListComb(block)
-  class JvListComb[LT](block: JValue => List[LT]) {
+  implicit class JvListComb[LT](val block: JValue => List[LT]) extends AnyVal {
     /** Synonym for Function1#andThen */
     def ~>[T](next: List[LT] => T) = block andThen next
     /** @return a function mapping next over block's output */
@@ -41,18 +40,15 @@ object Js extends TypeMappers with ImplicitJsonVerbs {
     /** @return a function flat-mapping next over block's output */
     def >>~>[T](next: LT => List[T]) = ~> { _ flatMap next }
   }
-  implicit def jvcomb[T](block: JValue => T) = new JvComb(block)
-  class JvComb[T](block: JValue => T) {
+  implicit class JvComb[T](val block: JValue => T) extends AnyVal {
     /** @return function that returns a tuple of block and other's output */
     def ~ [O](other: JValue => O) = { jv: JValue => (block(jv), other(jv)) }
   }
-  implicit def jvbind[A <: JValue](list: List[A]) = new JvBind(list)
-  class JvBind[A <: JValue](list: List[A]) {
+  implicit class JvBind[A <: JValue](val list: List[A]) extends AnyVal {
     /** @return synonym for flatMap (bind in Haskell) */
     def >>=[B](f: A => Iterable[B]) = list.flatMap(f)
   }
-  implicit def sym2op(sym: Symbol) = new SymOp(sym)
-  class SymOp(sym: Symbol) {
+  implicit class SymOp(val sym: Symbol) extends AnyVal {
     def ?[T](block: JValue => List[T]): JValue => List[T] = {
       case JObject(l) => l filter { _.name == sym.name } flatMap { jf => block(jf.value) }
       case JField(name, value) if name == sym.name => block(value) 
