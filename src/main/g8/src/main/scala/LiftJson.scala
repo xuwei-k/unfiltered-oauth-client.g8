@@ -5,7 +5,6 @@ package dispatch.liftjson
 import dispatch.classic._
 
 import net.liftweb.json._
-import JsonDSL._
 
 import java.util.Date
 

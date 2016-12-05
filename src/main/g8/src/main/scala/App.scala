@@ -14,7 +14,6 @@ import dispatch.classic.oauth.OAuth._
 import dispatch.liftjson.Js._
 
 import net.liftweb.json._
-import net.liftweb.json.JsonDSL._
 
 import scala.util.control.NonFatal
 

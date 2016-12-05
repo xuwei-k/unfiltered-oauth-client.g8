@@ -1,7 +1,6 @@
 package com.example
 
 import unfiltered.response.Html
-import dispatch.classic.oauth.Token
 
 trait Templates {
 
