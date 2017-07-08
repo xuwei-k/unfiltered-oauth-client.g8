@@ -9,7 +9,7 @@ object Client {
   val consumer = dispatch.classic.oauth.Consumer("key", "secret")
   def resources = new java.net.URL(getClass.getResource("/web/robots.txt"), ".")
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     logger.info("starting unfiltered oauth consumer at localhost on port " + port)
     val binding = unfiltered.jetty.SocketPortBinding(port, "localhost")
     unfiltered.jetty.Server.portBinding(binding)
